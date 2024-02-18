@@ -83,3 +83,26 @@ public class AesUtility
         return plaintext;
     }
 }
+
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Generate a random AES key and IV
+        byte[] key = AesUtility.GenerateRandomKey();
+        byte[] IV = AesUtility.GenerateRandomIV();
+
+        Console.WriteLine("Enter a string to encrypt:");
+        string original = Console.ReadLine();
+
+        // Encrypt the string
+        byte[] encrypted = AesUtility.EncryptStringToBytes(original, key, IV);
+        Console.WriteLine("Encrypted string: " + Convert.ToBase64String(encrypted));
+
+        // Decrypt the encrypted bytes back to a string
+        string decrypted = AesUtility.DecryptBytesToString(encrypted, key, IV);
+        Console.WriteLine("Decrypted string: " + decrypted);
+    }
+}
